@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Code Review 礼仪</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+        <style type="text/css">
+			.tl{text-align:left;}
+			.radus30{border-radius:30px;-webkit-border-radius:30px;-moz-border-radius:30px;}
+			.cf:before, .cf:after{content:"";display:table;}
+			.cf:after{clear:both;}
+			.cf{zoom:1;}
+			.file{width:180px;text-align:center;display:inline-block;padding-bottom:20px!important;}
+			.file img{display:block;width:70px;height:100px;border:none!important;background:none!important;margin:0 auto!important;}
+			.code{font:24px/36px '';padding:20px;width:400px;float:left;}
+            .qb{display:block;width:480px;height:120px;margin:0!important;line-height:120px!important;color: #fff;float: left;}
+        .fragment{font-size:44px;}
+        </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1 style="color: #669999">Code Review <span style="color:#cc6699">礼仪</span></h1>
+					<p style="color: #51483D;padding-top:15px;">
+						作者：<a href="#" style="color:#669999;margin-right: 20px;">李琳</a>
+                        Email：<a href="#" style="color:#669999;">lilin01@landicorp.com</a>
+					</p>
+				</section>
+        <section>
+          <h1 style="color:#6b717f;float:left;" >什么是 <b style="color:#cc6699!important;">Code Review</b><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为什么叫<b style="color:#cc6699!important;">"礼仪"</b></h1>
+        </section>
+        <section>
+          <section>
+            <h1 style="color:#669999;" >为什么需要 Code Review</h1>
+          </section>
+          <section>
+            <h2 style="color:#6b717f;" >开发人员的<b style="color:#cc6699!important;">"盲点"</b></h2>
+            <ol style="color:#669999;padding: 30px 0 30px 40px">
+              <li style="padding-top:10px;font-size:44px;">程序是照你写的跑，不是照你想的跑</li>
+              <li style="padding-top:25px;font-size:44px;">程序照你想的跑，但你想的是错的</li>
+            </ol>
+          </section>
+          <section>
+            <h1 style="color:#6b717f;">程序是属于团队的</h1>
+          </section>
+        </section>
+        <section>
+          <h2 style="color:#6b717f;">Code Review 的目标</h2>
+          <div style="width: 960px;padding-top:20px;margin:0 auto">
+            <p class="qb fragment" style="background-color:#669999 "> 保证代码质量</p>
+            <p class="qb fragment" style="background-color:#b37399 "> 统一代码风格</p>
+            <p class="qb fragment" style="background-color:#6a717f "> 增强代码阅读性</p>
+            <p class="qb fragment" style="background-color:#669999 "> 指引新同学</p>
+            <p class="qb fragment" style="background-color:#669999 "> 普及知识</p>
+            <p class="qb fragment" style="background-color:#b37399 "> 验证业务</p>
+          </div>
+        </section>
+        <section>
+          <h2 style="color:#6b717f;">如何做 Code Review</h2>
+          <ol style="color:#669999;padding: 30px 0 30px 0">
+            <li style="padding-top:10px;font-size:44px;"> Review 前的工作准备</li>
+            <li style="padding-top:15px;font-size:44px;"> Review 进行时</li>
+            <li style="padding-top:15px;font-size:44px;"> Review 的收尾</li>
+          </ol>
+        </section>
+        <section>
+          <section>
+            <h2 style="color:#6b717f;">Review 前的准备工作</h2>
+            <div style="width:760px;margin:0 auto">
+              <ol style="color:#669999;padding: 30px 0 10px 100px; float: left">
+                <li style="color:#669999;font-size:44px;" class="fragment">Reivew 通告</li>
+              </ol>
+              <p class="fragment"><img src="img/notice.png" width="100%"/></p>
+            </div>
+          </section>
+          <section>
+            <div style="width:660px;margin:0 auto">
+              <p style="color:#669999;font-size:44px;" class="tl" >2、代码自检</p>
+              <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" class="tl">JShint</p>
+              <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" class="tl">JavaScript 规范<br/><span style="font-size:24px;color:#6b717f">(argo\doc\argo-in-depth\guideline\JavaScript-standard.md)</span></p>
+              <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" class="tl">AngularJs 最佳实践<br/><a href="https://github.com/johnpapa/angular-styleguide/tree/master/a1" style="font-size:24px;color:#6b717f">(https://github.com/johnpapa/angular-styleguide/tree/master/a1)</a></p>
+            </div>
+          </section>
+          <section>
+            <div style="width:660px;margin:0 auto">
+              <p style="color:#669999;font-size:44px;" class="tl">3、 设施基础检查</p>
+              <p style="color:#669999;font-size:42px;padding:15px 0 0 30px;" class="tl">产品是否可展示</p>
+              <p style="color:#669999;font-size:42px;padding:15px 0 0 30px;" class="tl">IDE 的字体大小</p>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2 style="color:#6b717f;">Review 进行时</h2>
+            <ol style="color:#669999;padding: 30px 0 10px 30px;">
+              <li style="font-size:44px;padding-top:10px;" class="fragment">开始前再次通告</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">普及业务背景</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">描述功能，代码设计</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">根据代码框架层层描述</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">如实记录 Review Comments</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">遇到争议较大的问题，应先记录再讨论</li>
+            </ol>
+          </section>
+          <section>
+            <h2 style="color:#cc6699">Review 过程中不得修改代码</h2>
+          </section>
+          <section>
+            <h2 style="color:#6b717f;">善用 <span style="color:#cc6699">FIXME</span> 或 <span style="color:#cc6699">TODO</span> </h2>
+            <p style="color:#669999;font-size:44px;padding:30px 0 0 30px;" >FIXME : 有 bug 需要修改</p>
+            <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" >TODO : 还未完善的功能</p>
+          </section>
+          <section>
+            <h2 style="color:#6b717f;">参加 Review 的人要做什么</h2>
+            <div style="width:660px;margin:0 auto; text-align: left">
+              <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" >大胆提问</p>
+              <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" >程序是否满足业务需求</p>
+              <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" >程序是否满足未来的扩充性</p>
+              <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" >代码是否有坏味道</p>
+              <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" >代码易读性</p>
+              <p style="color:#669999;font-size:44px;padding:15px 0 0 30px;" >Error Handing</p>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2 style="color:#6b717f;">Review 收尾</h2>
+            <p style="float:left;width:640px;margin-left:160px;"><img src="img/review-summary.png" width="100%"/></p>
+            <p style="float:left;width:640px;"><img src="img/review-summary02.png"/></p>
+          </section>
+          <section>
+            <ol style="color:#669999;padding: 30px 0 10px 30px;">
+              <li style="font-size:44px;padding-top:10px;">当天出 Review 摘要</li>
+              <li style="font-size:44px;padding-top:10px;" >归纳总结 Review Comments</li>
+              <li style="font-size:44px;padding-top:10px;" >@参加人员 确认</li>
+              <li style="font-size:44px;padding-top:10px;">被@的人需要确认回复</li>
+              <li style="font-size:44px;padding-top:10px;">如实记录 Review Comments</li>
+              <li style="font-size:44px;padding-top:10px;" >如果修改的内容比较多，需安排多次 Review</li>
+            </ol>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1 style="color:#cc6699;">NG</h1>
+          </section>
+          <section>
+            <ol style="color:#669999;padding: 30px 0 10px 30px;">
+              <li style="font-size:44px;padding-top:10px;">基础问题太多</li>
+              <li style="font-size:44px;padding-top:15px;" >设计方面有重大的问题</li>
+              <li style="font-size:44px;padding-top:15px;" >业务上有较大的出入</li>
+            </ol>
+          </section>
+          <section>
+            <ol style="color:#669999;padding: 30px 0 10px 30px;">
+              <li style="font-size:44px;padding-top:10px;">NG Review 摘要</li>
+              <li style="font-size:44px;padding-top:15px;" >重新安排 Review</li>
+            </ol>
+          </section>
+        </section>
+        <section>
+          <h2 style="color:#6b717f;">总结</h2>
+          <div style="width:960px;margin:0 auto">
+            <ol style="color:#669999;padding: 30px 0 10px 30px;">
+              <li style="font-size:44px;padding-top:10px;" class="fragment">审核清单</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">提前准备不能省，让会议效率最优化</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">频繁且小范围的进行 Review</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">快速提升团队的整理水平</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">通过 Review 摘要来追踪会议记录与代码事项</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">建立团队文化和开发规范</li>
+              <li style="font-size:44px;padding-top:10px;" class="fragment">Review 的心态要正确</li>
+            </ol>
+          </div>
+        </section>
+
+        <section>
+					<h1 style="color: #669999">Thank You！</h1>
+				</section>
+                
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, 
+				transition: Reveal.getQueryHash().transition || 'default', 
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
