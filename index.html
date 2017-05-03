@@ -326,15 +326,15 @@
       
         
           
-            <h1 id="前端如何配合服务端进行-CORS-跨域"><a href="#前端如何配合服务端进行-CORS-跨域" class="headerlink" title="前端如何配合服务端进行 CORS 跨域"></a>前端如何配合服务端进行 CORS 跨域</h1><blockquote>
+            <blockquote>
 <p>最近正在用 vue.js + vuex + axios 开发一个后台管理的项目。由于服务端的接口地址与 web 的访问不在同一个域里面，所以必须要处理跨域的问题，通过调研跨域的方法，最终决定使用目前比较流行的 CORS 来处理跨域 ，以下介绍在使用 cors 的时候遇到的那些坑，以及处理方法。</p>
 </blockquote>
 <p>现在所有的浏览器基本上都支持 CORS（IE需要10以上），所以只需要服务器实现 CORS 的接口，就可以跨域通讯了。服务端基本的配置如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;Access-Control-Allow-Origin&quot; =&gt; $host_name,</div><div class="line">&quot;Access-Control-Allow-Headers&quot; =&gt; &quot;x-token,x-uid,x-token-check,x-requested-with,content-type,Host,auth-token,Authorization&quot;,</div></pre></td></tr></table></figure>
 <p>服务端配置完以后，前端在发起请求，就会变成两个。首先会向服务器发一个预检请求。</p>
-<p><img src="./option-request.png" alt="option-request"></p>
+<img src="/2017/05/02/ajax-with-cors/option-request.png" alt="option-request" title="option-request">
 <p>从图中可以看到请求的方法是：OTPTION。这个请求只要是用于检查<br>Access-Control-Allow-Origin<br>Access-Control-Request-Headers 这两个字段，确认允许跨域请求以后，才正式发出我们想要的请求</p>
-<p><img src="./myself-request.png" alt="myself-request"></p>
+<img src="/2017/05/02/ajax-with-cors/myself-request.png" alt="myself-request" title="myself-request">
 <p>完成这一步，CORS 请求基本上就成功了。</p>
 <p>但是请别高兴的太早，CORS 请求默认是不发送 <code>Cookies</code> 和 <code>HTTP</code> 认证信息的。而服务端需要</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">”Access-Control-Expose-Headers” =&gt; ‘auth-token’</div></pre></td></tr></table></figure>
@@ -351,133 +351,10 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_cross_headers</span><span class="params">()</span></span>&#123;</div><div class="line">    $host_name = <span class="keyword">isset</span>($_SERVER[<span class="string">'HTTP_ORIGIN'</span>]) ? $_SERVER[<span class="string">'HTTP_ORIGIN'</span>] : <span class="string">"*"</span>;</div><div class="line">    $headers = [</div><div class="line">        <span class="string">"Access-Control-Allow-Origin"</span> =&gt; $host_name,</div><div class="line">        <span class="string">"Access-Control-Allow-Credentials"</span> =&gt; <span class="string">'true'</span>,</div><div class="line">        <span class="string">"Access-Control-Allow-Headers"</span> =&gt; <span class="string">"x-token,x-uid,x-token-check,x-requested-with,content-type,Host,auth-token,Authorization"</span>,</div><div class="line">        <span class="string">"Access-Control-Expose-Headers"</span> =&gt; <span class="string">'auth-token'</span></div><div class="line">    ];</div><div class="line">    <span class="keyword">return</span> $headers;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong> Axios 配置 </strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> axiosInstance = axios.create(&#123;</div><div class="line">  <span class="attr">withCredentials</span>: <span class="literal">true</span></div><div class="line">&#125;)</div><div class="line">axiosInstance.interceptors.request.use(<span class="function"><span class="params">config</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> token = ls.get(<span class="string">'token'</span>) <span class="comment">//从 localstorage 中获取token</span></div><div class="line">  <span class="keyword">if</span> (token) &#123;</div><div class="line">    config.headers[<span class="string">'auth-token'</span>] = token</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> config</div><div class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</div><div class="line">&#125;)</div><div class="line">axiosInstance.interceptors.response.use(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> token = response.headers[<span class="string">'auth-token'</span>]</div><div class="line">  token &amp;&amp; ls.set(<span class="string">'token'</span>, token) <span class="comment">//将 token 存入 localstorage</span></div><div class="line">  <span class="keyword">return</span> response.data</div><div class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/02/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-02T15:38:56+08:00">
-                2017-05-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="external">跨域资源共享 CORS 详解</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">HTTP访问控制（CORS）</a></li>
+</ul>
 
           
         
@@ -557,7 +434,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>

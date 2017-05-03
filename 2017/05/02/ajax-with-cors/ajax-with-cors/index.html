@@ -94,16 +94,16 @@
 <meta name="keywords" content="ajax cors">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端如何配合服务端进行 CORS 跨域">
-<meta property="og:url" content="http://yoursite.com/2017/05/02/ajax-with-cors/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/05/02/ajax-with-cors/ajax-with-cors/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="最近正在用 vue.js + vuex + axios 开发一个后台管理的项目。由于服务端的接口地址与 web 的访问不在同一个域里面，所以必须要处理跨域的问题，通过调研跨域的方法，最终决定使用目前比较流行的 CORS 来处理跨域 ，以下介绍在使用 cors 的时候遇到的那些坑，以及处理方法。  现在所有的浏览器基本上都支持 CORS（IE需要10以上），所以只需要服务器实现 CORS 的接口，">
-<meta property="og:image" content="http://yoursite.com/2017/05/02/ajax-with-cors/option-request.png">
-<meta property="og:image" content="http://yoursite.com/2017/05/02/ajax-with-cors/myself-request.png">
-<meta property="og:updated_time" content="2017-05-03T03:44:42.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/05/02/ajax-with-cors/ajax-with-cors/option-request.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/02/ajax-with-cors/ajax-with-cors/myself-request.png">
+<meta property="og:updated_time" content="2017-05-03T03:24:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端如何配合服务端进行 CORS 跨域">
 <meta name="twitter:description" content="最近正在用 vue.js + vuex + axios 开发一个后台管理的项目。由于服务端的接口地址与 web 的访问不在同一个域里面，所以必须要处理跨域的问题，通过调研跨域的方法，最终决定使用目前比较流行的 CORS 来处理跨域 ，以下介绍在使用 cors 的时候遇到的那些坑，以及处理方法。  现在所有的浏览器基本上都支持 CORS（IE需要10以上），所以只需要服务器实现 CORS 的接口，">
-<meta name="twitter:image" content="http://yoursite.com/2017/05/02/ajax-with-cors/option-request.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/05/02/ajax-with-cors/ajax-with-cors/option-request.png">
 
 
 
@@ -131,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/02/ajax-with-cors/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/02/ajax-with-cors/ajax-with-cors/"/>
 
 
 
@@ -256,7 +256,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/ajax-with-cors/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/ajax-with-cors/ajax-with-cors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -333,9 +333,9 @@
 <p>现在所有的浏览器基本上都支持 CORS（IE需要10以上），所以只需要服务器实现 CORS 的接口，就可以跨域通讯了。服务端基本的配置如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;Access-Control-Allow-Origin&quot; =&gt; $host_name,</div><div class="line">&quot;Access-Control-Allow-Headers&quot; =&gt; &quot;x-token,x-uid,x-token-check,x-requested-with,content-type,Host,auth-token,Authorization&quot;,</div></pre></td></tr></table></figure>
 <p>服务端配置完以后，前端在发起请求，就会变成两个。首先会向服务器发一个预检请求。</p>
-<img src="/2017/05/02/ajax-with-cors/option-request.png" alt="option-request" title="option-request">
+<p><img src="./option-request.png" alt="option-request"></p>
 <p>从图中可以看到请求的方法是：OTPTION。这个请求只要是用于检查<br>Access-Control-Allow-Origin<br>Access-Control-Request-Headers 这两个字段，确认允许跨域请求以后，才正式发出我们想要的请求</p>
-<img src="/2017/05/02/ajax-with-cors/myself-request.png" alt="myself-request" title="myself-request">
+<p><img src="./myself-request.png" alt="myself-request"></p>
 <p>完成这一步，CORS 请求基本上就成功了。</p>
 <p>但是请别高兴的太早，CORS 请求默认是不发送 <code>Cookies</code> 和 <code>HTTP</code> 认证信息的。而服务端需要</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">”Access-Control-Expose-Headers” =&gt; ‘auth-token’</div></pre></td></tr></table></figure>
