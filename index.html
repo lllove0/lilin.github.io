@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -91,11 +91,11 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="不知归路">
 <meta property="og:url" content="http://lilin.me/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="不知归路">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="不知归路">
 
 
 
@@ -109,7 +109,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -129,10 +129,10 @@
 
 
 
-  <title>Hexo</title>
+  <title>不知归路</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -167,7 +167,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">不知归路</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -197,7 +197,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -207,17 +207,17 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+        <li class="menu-item menu-item-ppt">
+          <a href="/ppt" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-file"></i> <br />
             
-            Tags
+            ppt
           </a>
         </li>
       
@@ -253,13 +253,13 @@
     <link itemprop="mainEntityOfPage" href="http://lilin.me/2017/05/02/ajax-with-cors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Lynn">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="不知归路">
     </span>
 
     
@@ -287,9 +287,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-02T15:44:25+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T15:44:25+08:00">
                 2017-05-02
               </time>
             
@@ -351,7 +351,8 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_cross_headers</span><span class="params">()</span></span>&#123;</div><div class="line">    $host_name = <span class="keyword">isset</span>($_SERVER[<span class="string">'HTTP_ORIGIN'</span>]) ? $_SERVER[<span class="string">'HTTP_ORIGIN'</span>] : <span class="string">"*"</span>;</div><div class="line">    $headers = [</div><div class="line">        <span class="string">"Access-Control-Allow-Origin"</span> =&gt; $host_name,</div><div class="line">        <span class="string">"Access-Control-Allow-Credentials"</span> =&gt; <span class="string">'true'</span>,</div><div class="line">        <span class="string">"Access-Control-Allow-Headers"</span> =&gt; <span class="string">"x-token,x-uid,x-token-check,x-requested-with,content-type,Host,auth-token,Authorization"</span>,</div><div class="line">        <span class="string">"Access-Control-Expose-Headers"</span> =&gt; <span class="string">'auth-token'</span></div><div class="line">    ];</div><div class="line">    <span class="keyword">return</span> $headers;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong> Axios 配置 </strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> axiosInstance = axios.create(&#123;</div><div class="line">  <span class="attr">withCredentials</span>: <span class="literal">true</span></div><div class="line">&#125;)</div><div class="line">axiosInstance.interceptors.request.use(<span class="function"><span class="params">config</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> token = ls.get(<span class="string">'token'</span>) <span class="comment">//从 localstorage 中获取token</span></div><div class="line">  <span class="keyword">if</span> (token) &#123;</div><div class="line">    config.headers[<span class="string">'auth-token'</span>] = token</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> config</div><div class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</div><div class="line">&#125;)</div><div class="line">axiosInstance.interceptors.response.use(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> token = response.headers[<span class="string">'auth-token'</span>]</div><div class="line">  token &amp;&amp; ls.set(<span class="string">'token'</span>, token) <span class="comment">//将 token 存入 localstorage</span></div><div class="line">  <span class="keyword">return</span> response.data</div><div class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
+<p><strong> Ref </strong></p>
+<ul>
 <li><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="external">跨域资源共享 CORS 详解</a></li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">HTTP访问控制（CORS）</a></li>
 </ul>
@@ -423,8 +424,8 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
-               alt="John Doe" />
-          <p class="site-author-name" itemprop="name">John Doe</p>
+               alt="Lynn" />
+          <p class="site-author-name" itemprop="name">Lynn</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
           
@@ -435,7 +436,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
@@ -448,7 +449,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">标签</span>
               
             </div>
           
@@ -491,18 +492,18 @@
   &copy; 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-Lynn"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
 </div>
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
